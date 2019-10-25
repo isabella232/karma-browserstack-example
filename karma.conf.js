@@ -59,7 +59,8 @@ module.exports = function(config) {
     browserStack: {
       username: process.env.BROWSERSTACK_USERNAME,
       accessKey: process.env.BROWSERSTACK_KEY,
-      build: process.env.BUILD_NUMBER,
+      build: process.env.TRAVIS_BUILD_NUMBER,
+      project: 'karma-browserstack-example',
     },
 
     // define browsers
