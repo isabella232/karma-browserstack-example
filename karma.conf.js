@@ -55,35 +55,39 @@ module.exports = function(config) {
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
-    
+
     browserStack: {
       username: process.env.BROWSERSTACK_USERNAME,
-      accessKey: process.env.BROWSERSTACK_KEY
+      accessKey: process.env.BROWSERSTACK_KEY,
+      build: process.env.BUILD_NUMBER,
     },
 
     // define browsers
     customLaunchers: {
+      bs_iphone_xs: {
+        base: 'BrowserStack',
+        os_version : '13.0',
+        device : 'iPhone XS',
+        real_mobile : 'true',
+        os: 'ios'
+      },
       bs_firefox_mac: {
         base: 'BrowserStack',
         browser: 'firefox',
-        browser_version: '21.0',
         os: 'OS X',
-        os_version: 'Mountain Lion'
+        os_version: 'Mountain Lion',
       },
-      bs_iphone5: {
-        base: 'BrowserStack',
-        device: 'iPhone 5',
-        os: 'ios',
-        os_version: '6.0'
-      }
     },
 
-    browsers: ['bs_firefox_mac', 'bs_iphone5'],
+    browsers: ['bs_iphone_xs', 'bs_firefox_mac'],
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true
+    singleRun: true,
+
+    // Fix for https://www.browserstack.com/question/663
+    hostname: 'bs-local.com',
   })
 }
